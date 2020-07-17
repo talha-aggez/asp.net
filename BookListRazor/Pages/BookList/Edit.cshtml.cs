@@ -26,9 +26,13 @@ namespace BookListRazor.Pages.BookList
             {
                 var BookFromDb = await _db.Book.FindAsync(Book.Id);
                 BookFromDb.Name = Book.Name;
-                BookFromDb.Name = Book.ISBN;
-                BookFromDb.Name = Book.Author;
+                BookFromDb.ISBN = Book.ISBN;
+                BookFromDb.Author = Book.Author;
+
+                await _db.SaveChangesAsync();
+                return RedirectToPage("Index");
             }
+            return RedirectToPage();
         }
     }
 }
